@@ -1,9 +1,6 @@
 package br.com.unifalmg.blog.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
@@ -19,6 +16,7 @@ import java.util.List;
 public class User implements Serializable { // Importante colocar "implements Serializable" para não dar erro
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
@@ -33,4 +31,5 @@ public class User implements Serializable { // Importante colocar "implements Se
 
     @OneToMany(mappedBy = "user")
     private List<Post> posts;
+
 }
