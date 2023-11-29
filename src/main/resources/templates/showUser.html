@@ -34,10 +34,10 @@
                 <th>Title</th>
                 <th>Body</th>
             </tr>
-            <tr th:each="post : ${user.posts}">
-                <td><span>th:text="${post.id}"</span></td>
-                <td><span>th:text="${post.title}"</span></td>
-                <td><span>th:text="${post.body}"</span></td>
+            <tr th:each="post:${user.posts}">
+                <td><span th:text="${post.id}"></span></td>
+                <td><span th:text="${post.title}"></span></td>
+                <td><span th:text="${post.body}"></span></td>
             </tr>
         </table>
 
