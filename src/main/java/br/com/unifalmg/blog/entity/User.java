@@ -32,4 +32,7 @@ public class User implements Serializable { // Importante colocar "implements Se
     @OneToMany(mappedBy = "user")
     private List<Post> posts;
 
+    @OneToMany(mappedBy = "user")
+    private List<Comment> comments;
+
 }
