@@ -19,7 +19,6 @@ public class UserService {
     private final UserRepository repository;
 
     public List<User> getAllUsers(){
-        //TODO: Fazer a conexão com o BD
         return repository.findAll();
     }
 
@@ -41,4 +40,26 @@ public class UserService {
         }
         return repository.save(user);
     }
+
+    public User edit(Integer id, User user) {
+        if (Objects.isNull(id) || Objects.isNull(user) || Objects.isNull(user.getName())
+                || Objects.isNull(user.getUsername()) || Objects.isNull(user.getEmail()) || Objects.isNull(user.getWebsite())
+                || user.getName().isEmpty() || user.getUsername().isEmpty() || user.getEmail().isEmpty() || user.getWebsite().isEmpty()) {
+            throw new IllegalArgumentException("Id or updated user is null.");
+        }
+        Optional<User> optionalUser = repository.findById(id);
+        if(optionalUser.isPresent()) {
+            User editUser = optionalUser.get();
+            editUser.setName(user.getName());
+            editUser.setEmail(user.getEmail());
+            editUser.setUsername(user.getUsername());
+            editUser.setWebsite(user.getWebsite());
+
+        }
+        return repository.save(editUser);
+    }
+
+
 }
+
+

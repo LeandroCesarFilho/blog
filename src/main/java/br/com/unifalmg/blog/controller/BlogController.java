@@ -51,4 +51,19 @@ public class BlogController {
         model.addAttribute("user", user);
         return "showUser";
     }
+
+    @GetMapping("/edituser/{id}")
+    public String editUser(@PathVariable("id") Integer id,
+                           Model model) {
+        User user = service.findById(id);
+        model.addAttribute("user",user);
+        return "editUser";
+    }
+
+    @PostMapping("/edituser/{id}")
+    public String editUser(@ModelAttribute("user") User user) {
+        log.info("Usuário alterado");
+        User editedUser = service.edit(user.getId(),user);
+        return  "redirect:/user/" + editedUser.getId();
+    }
 }
