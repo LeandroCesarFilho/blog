@@ -27,7 +27,7 @@
                 <td><span th:text="${user.website}"></span></td>
             </tr>
         </table>
-        <form th:action="@{/user}" th:object="${user}" method="post">
+        <form th:action="@{/user}" th:object="${user}" method="put">
             <label>
                 Name:
                 <input type="text" id="name" th:field="*{name}"/>

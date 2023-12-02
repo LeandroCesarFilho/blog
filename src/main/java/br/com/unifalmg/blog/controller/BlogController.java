@@ -5,6 +5,7 @@ import br.com.unifalmg.blog.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,9 +59,11 @@ public class BlogController {
     }
 
     @PutMapping("/edituser/{id}")
+    @Transactional
     public String editUser(@ModelAttribute("user") User user) {
         log.info("Usuário alterado");
         User editedUser = service.edit(user.getId(),user);
-        return  "redirect:/user/" + editedUser.getId();
+        // return  "redirect:/user/" + editedUser.getId();
+        return "redirect:/users/";
     }
 }

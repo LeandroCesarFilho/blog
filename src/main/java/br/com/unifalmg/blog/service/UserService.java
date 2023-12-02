@@ -48,15 +48,16 @@ public class UserService {
             throw new IllegalArgumentException("Id or updated user is null.");
         }
         Optional<User> optionalUser = repository.findById(id);
-        if(optionalUser.isPresent()) {
+
+        if (optionalUser.isPresent()) {
             User editUser = optionalUser.get();
             editUser.setName(user.getName());
             editUser.setEmail(user.getEmail());
             editUser.setUsername(user.getUsername());
             editUser.setWebsite(user.getWebsite());
-
+            return repository.save(editUser);
         }
-        return repository.save(editUser);
+        return null;
     }
 
 
