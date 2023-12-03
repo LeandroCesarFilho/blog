@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Blog - Users</title>
+    <title>Show User</title>
 </head>
 <body>
     <header>
-        <h1>All users in the Blog</h1>
+        <h1>Show User</h1>
     </header>
     <main>
         <table>
@@ -18,15 +18,29 @@
                 <th>Phone</th>
                 <th>Website</th>
             </tr>
-            <tr th:each="user : ${users}"> <!-- O each serve para mostrar todos os users-->
+            <tr th:object="${user}">
                 <td><span th:text="${user.id}"></span></td>
                 <td><span th:text="${user.name}"></span></td>
                 <td><span th:text="${user.username}"></span></td>
                 <td><span th:text="${user.email}"></span></td>
                 <td><span th:text="${user.phone}"></span></td>
                 <td><span th:text="${user.website}"></span></td>
-               </tr>
-           </table>
-       </main>
-   </body>
-   </html>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Body</th>
+            </tr>
+            <tr th:each="post:${user.posts}">
+                <td><span th:text="${post.id}"></span></td>
+                <td><span th:text="${post.title}"></span></td>
+                <td><span th:text="${post.body}"></span></td>
+            </tr>
+        </table>
+
+    </main>
+</body>
+</html>
