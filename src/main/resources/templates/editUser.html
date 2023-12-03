@@ -27,7 +27,7 @@
                 <td><span th:text="${user.website}"></span></td>
             </tr>
         </table>
-        <form th:action="@{/user}" th:object="${user}" method="put">
+        <form th:action="@{'/edituser/' + ${user.id}}" th:object="${user}" method="post">
             <label>
                 Name:
                 <input type="text" id="name" th:field="*{name}"/>
@@ -53,7 +53,7 @@
                 <input type="text" id="website" th:field="*{website}"/>
             </label>
             <br/>
-            <input type="submit" value="Save">
+            <button>Edit</button>
         </form>
     </main>
 

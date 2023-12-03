@@ -1,6 +1,7 @@
 package br.com.unifalmg.blog.controller;
 
 import br.com.unifalmg.blog.entity.User;
+import br.com.unifalmg.blog.exception.UserNotFoundException;
 import br.com.unifalmg.blog.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -53,17 +54,31 @@ public class BlogController {
     @GetMapping("/edituser/{id}")
     public String editUser(@PathVariable("id") Integer id,
                            Model model) {
-        User user = service.findById(id);
-        model.addAttribute("user",user);
-        return "editUser";
+        try {
+            User user = service.findById(id);
+            model.addAttribute("user",user);
+            return "editUser";
+        } catch (UserNotFoundException exception) {
+            return "redirect:/user";
+        }
     }
 
-    @PutMapping("/edituser/{id}")
-    @Transactional
-    public String editUser(@ModelAttribute("user") User user) {
-        log.info("Usuário alterado");
-        User editedUser = service.edit(user.getId(),user);
-        // return  "redirect:/user/" + editedUser.getId();
+    @PostMapping("/edituser/{id}")
+    public String editUser(@PathVariable("id") Integer id, @ModelAttribute User user, Model model) {
+        try {
+            log.info("Entrou na edição de usuário!");
+            User editedUser = service.update(id,user);
+            return "redirect:/user/" + editedUser.getId();
+        } catch (UserNotFoundException exception) {
+
+            return "redirect:/user";
+        }
+    }
+
+    @DeleteMapping("/deleteuser/{id}")
+    public String deleteUser(@PathVariable("id") Integer id, Model model) {
+        service.deleteById(id);
+
         return "redirect:/users/";
     }
 }
